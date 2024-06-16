@@ -45,17 +45,19 @@ RUN poetry install
 # Update PyTorch (adjust this part based on GPU/CPU requirements)
 RUN pip install --upgrade pip
 ### GPU Only
-# RUN pip install torch
+ RUN pip install torch torchvision
 ## ====
 ### CPU Only
-RUN poetry remove torch
-RUN pip install --no-cache-dir --no-warn-script-location torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+#RUN poetry remove torch
+#RUN pip install --no-cache-dir --no-warn-script-location torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 ## ====
 RUN pip install --no-cache-dir --no-warn-script-location PyMuPDF pydantic ftfy python-dotenv \ 
     pydantic-settings tabulate pyspellchecker ocrmypdf nltk thefuzz scikit-learn texify \
     python-magic
 
 COPY . .
+COPY local.env /usr/src/app/marker/marker/local.env
+RUN mkdir /.cache && chmod -R 777 /.cache
 
 RUN python convert_single.py test.pdf test.md
 
