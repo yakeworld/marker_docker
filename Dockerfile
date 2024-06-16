@@ -53,7 +53,7 @@ RUN pip install --upgrade pip
 ## ====
 RUN pip install --no-cache-dir --no-warn-script-location PyMuPDF pydantic ftfy python-dotenv \ 
     pydantic-settings tabulate pyspellchecker ocrmypdf nltk thefuzz scikit-learn texify \
-    python-magic
+    python-magic surya-ocr pdftext
 
 COPY . .
 COPY local.env /usr/src/app/marker/marker/local.env
